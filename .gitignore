@@ -1,0 +1,8 @@
+# Generado por scripts
+contenido_extraido.txt
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+*.pyc
+__pycache__/
