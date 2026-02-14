@@ -8,25 +8,34 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
-    /* Tema positivo: fondo claro, tipografía amigable, colores que transmiten confianza y crecimiento */
+    /* Tema positivo + neurodiseño: cálido, jerarquía clara, ritmo visual, menos texto plano */
     :root {
-      --bg: #f0f7ff;
-      --bg-gradient: linear-gradient(160deg, #f0f7ff 0%, #e8f4fc 40%, #f5f9fc 100%);
+      --bg: #e8f4f8;
+      --bg-warm: #fef3ed;
+      /* Fondo más vivo: tonos teal, melocotón y menta visibles */
+      --bg-gradient: linear-gradient(165deg, #d6eef5 0%, #e0f2f7 20%, #fce7f0 45%, #d1f5e8 70%, #e8f4fc 100%);
       --surface: #ffffff;
-      --surface-soft: rgba(255, 255, 255, 0.9);
-      --text: #1e3a5f;
-      --text-muted: #475569;
+      --surface-soft: rgba(255, 255, 255, 0.92);
+      --surface-tint: linear-gradient(135deg, #ffffff 0%, #fafcff 50%, #f8fbff 100%);
+      --text: #1a2f4a;
+      --text-muted: #4a5f7a;
       --accent: #0d9488;
-      --accent-soft: rgba(13, 148, 136, 0.12);
+      --accent-soft: rgba(13, 148, 136, 0.14);
       --coral: #e85d4c;
-      --coral-soft: rgba(232, 93, 76, 0.15);
-      --magenta: #c73e6b;
-      --magenta-soft: rgba(199, 62, 107, 0.15);
+      --coral-soft: rgba(232, 93, 76, 0.12);
+      --magenta: #b82d5c;
+      --magenta-soft: rgba(184, 45, 92, 0.12);
       --cyan: #0891b2;
       --green: #059669;
-      --border: #e2e8f0;
+      --border: #e0e8f2;
       --success: #10b981;
-      --radius: 12px;
+      --radius: 14px;
+      --radius-sm: 8px;
+      /* Profundidad muy exagerada: sombras grandes y oscuras + toque de color */
+      --shadow-soft: 0 6px 20px rgba(26, 47, 74, 0.18), 0 18px 50px rgba(26, 47, 74, 0.2), 0 0 0 1px rgba(0,0,0,0.04);
+      --shadow-card: 0 12px 32px rgba(26, 47, 74, 0.22), 0 28px 64px rgba(26, 47, 74, 0.25), 0 48px 100px rgba(13, 148, 136, 0.08), 0 0 0 1px rgba(0,0,0,0.05);
+      --shadow-hover: 0 20px 48px rgba(26, 47, 74, 0.28), 0 40px 80px rgba(26, 47, 74, 0.3), 0 60px 120px rgba(13, 148, 136, 0.12), 0 0 0 1px rgba(0,0,0,0.06);
+      --shadow-lift: 0 -3px 8px 0 rgba(255,255,255,0.95) inset, 0 2px 0 0 rgba(255,255,255,0.5) inset;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,13 +45,23 @@
       background: var(--bg-gradient);
       background-attachment: fixed;
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.72;
       font-size: 1.05rem;
       overflow-x: hidden;
       position: relative;
     }
+    /* Textura sutil: puntos muy suaves para dar profundidad (neuro: reduce sensación de “plano”) */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: radial-gradient(circle at 1px 1px, rgba(26, 47, 74, 0.04) 1px, transparent 0);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
 
-    /* Fondo: orbes suaves en tonos positivos (confianza + energía) */
+    /* Fondo: orbes más vivos en teal, verde, coral y cyan */
     .neon-bg {
       position: fixed;
       inset: 0;
@@ -53,59 +72,59 @@
     .neon-orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.5;
+      filter: blur(80px);
+      opacity: 0.7;
       animation: neon-pulse 8s ease-in-out infinite;
     }
     .neon-orb--1 {
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, rgba(8, 145, 178, 0.4) 0%, rgba(8, 145, 178, 0.08) 50%, transparent 70%);
-      top: -120px;
-      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(8, 145, 178, 0.55) 0%, rgba(8, 145, 178, 0.2) 40%, transparent 70%);
+      top: -140px;
+      right: -80px;
       animation-delay: 0s;
     }
     .neon-orb--2 {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(5, 150, 105, 0.35) 0%, rgba(5, 150, 105, 0.06) 50%, transparent 70%);
-      bottom: 10%;
-      left: -120px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(5, 150, 105, 0.5) 0%, rgba(5, 150, 105, 0.18) 40%, transparent 70%);
+      bottom: 5%;
+      left: -100px;
       animation-delay: -2s;
     }
     .neon-orb--3 {
-      width: 320px;
-      height: 320px;
-      background: radial-gradient(circle, rgba(232, 93, 76, 0.3) 0%, rgba(232, 93, 76, 0.05) 50%, transparent 70%);
-      bottom: -80px;
-      right: 15%;
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(232, 93, 76, 0.45) 0%, rgba(252, 131, 145, 0.25) 40%, transparent 70%);
+      bottom: -60px;
+      right: 10%;
       animation-delay: -4s;
     }
     .neon-orb--4 {
-      width: 380px;
-      height: 380px;
-      background: radial-gradient(circle, rgba(13, 148, 136, 0.3) 0%, rgba(13, 148, 136, 0.06) 50%, transparent 70%);
-      top: 40%;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.5) 0%, rgba(13, 148, 136, 0.2) 40%, transparent 70%);
+      top: 35%;
       left: 50%;
-      margin-left: -190px;
-      margin-top: -190px;
+      margin-left: -210px;
+      margin-top: -210px;
       animation-delay: -6s;
     }
     .neon-line {
       position: absolute;
-      background: linear-gradient(90deg, transparent, rgba(8, 145, 178, 0.15), transparent);
-      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(8, 145, 178, 0.35), transparent);
+      height: 3px;
       width: 100%;
       top: 30%;
       left: 0;
     }
     .neon-line--2 {
-      background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.12), transparent);
+      background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.3), transparent);
       top: 65%;
     }
     @keyframes neon-pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.6; }
+      0%, 100% { opacity: 0.55; }
+      50% { opacity: 0.85; }
     }
 
     .nav {
@@ -168,21 +187,34 @@
       padding-bottom: 2rem;
     }
     .hero .tag {
+      display: inline-block;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1.2rem;
+      font-size: 1rem;
+      font-weight: 600;
       color: var(--cyan);
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 0.6rem;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.75rem;
+      padding: 0.4rem 1rem;
+      background: var(--accent-soft);
+      border-radius: 999px;
+      border: 1px solid rgba(8, 145, 178, 0.25);
     }
     .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
-      font-weight: 700;
-      line-height: 1.2;
+      font-size: clamp(2.5rem, 6.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.15;
       margin-bottom: 0.5rem;
       color: #0d9488;
+      letter-spacing: -0.03em;
     }
-    .hero .sub { font-size: 1.2rem; color: var(--text-muted); max-width: 560px; margin: 0 auto 1rem; }
+    .hero h1 .hero-title-text {
+      background: linear-gradient(135deg, #0d9488 0%, #0891b2 50%, #0f766e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero .sub { font-size: 1.22rem; color: var(--text-muted); max-width: 560px; margin: 0 auto 1rem; font-weight: 500; }
     .hero .scroll-hint {
       margin-top: 1.5rem;
       font-size: 1rem;
@@ -211,6 +243,10 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
+    @keyframes emoji-pulse-soft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
     @keyframes emoji-bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
@@ -223,28 +259,32 @@
       0%, 100% { opacity: 1; filter: drop-shadow(0 0 4px rgba(233, 30, 140, 0.4)); }
       50% { opacity: 0.9; filter: drop-shadow(0 0 12px rgba(233, 30, 140, 0.6)); }
     }
-    .section-icon { animation: emoji-pulse 2.5s ease-in-out infinite; }
-    .goal-emoji { animation: emoji-bounce 2s ease-in-out infinite; display: inline-block; }
-    .hero-mv-title { animation: emoji-pulse 3s ease-in-out infinite; }
-    .ws .ws-id { animation: emoji-float 2.2s ease-in-out infinite; display: inline-block; }
-    .gate .gate-id { animation: emoji-pulse 2.8s ease-in-out infinite; }
-    .emoji-ani { display: inline-block; animation: emoji-bounce 2s ease-in-out infinite; }
+    .section-icon { animation: emoji-pulse 5s ease-in-out infinite; }
+    .goal-emoji { animation: emoji-bounce 4s ease-in-out infinite; display: inline-block; }
+    .hero-mv-title { animation: emoji-pulse 6s ease-in-out infinite; }
+    #innovacion-mision-vision .hero-mv-title { animation: emoji-pulse-soft 6s ease-in-out infinite; }
+    .ws .ws-id { animation: emoji-float 4.5s ease-in-out infinite; display: inline-block; }
+    .gate .gate-id { animation: emoji-pulse 5.5s ease-in-out infinite; }
+    .emoji-ani { display: inline-block; animation: emoji-bounce 4s ease-in-out infinite; }
     .hero-deco .emoji-ani:nth-child(1) { animation-delay: 0s; }
-    .hero-deco .emoji-ani:nth-child(2) { animation-delay: 0.2s; }
-    .hero-deco .emoji-ani:nth-child(3) { animation-delay: 0.4s; }
-    .hero-deco .emoji-ani:nth-child(4) { animation-delay: 0.6s; }
-    #principios .card h3 .emoji-ani { margin-right: 0.2rem; animation: emoji-pulse 2.5s ease-in-out infinite; }
+    .hero-deco .emoji-ani:nth-child(2) { animation-delay: 0.4s; }
+    .hero-deco .emoji-ani:nth-child(3) { animation-delay: 0.8s; }
+    .hero-deco .emoji-ani:nth-child(4) { animation-delay: 1.2s; }
+    #principios .card h3 .emoji-ani { margin-right: 0.2rem; animation: emoji-pulse 5s ease-in-out infinite; }
     #calendario .timeline-item h4 .emoji-ani { margin-right: 0.25rem; }
     #entregables .entregables-list li .emoji-ani { margin-right: 0.3rem; }
 
     section h2 {
-      font-size: 1.7rem;
-      font-weight: 600;
+      font-size: 1.85rem;
+      font-weight: 700;
       margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      display: inline-block;
+      padding-bottom: 0.6rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
       color: var(--text);
       position: relative;
+      letter-spacing: -0.02em;
     }
     section h2::after {
       content: '';
@@ -252,30 +292,56 @@
       left: 0;
       bottom: 0;
       width: 100%;
-      height: 2px;
+      height: 3px;
       background: linear-gradient(90deg, var(--cyan), var(--accent));
-      border-radius: 1px;
+      border-radius: 2px;
+      opacity: 0.9;
     }
-    section h3 { font-size: 1.25rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--cyan); }
+    /* Píldora opcional para número de sección (ritmo visual) */
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2rem;
+      height: 1.75rem;
+      padding: 0 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--magenta);
+      background: var(--magenta-soft);
+      border-radius: var(--radius-sm);
+    }
+    section h3 { font-size: 1.28rem; font-weight: 600; margin: 1rem 0 0.5rem; color: var(--cyan); }
     section p { margin-bottom: 0.85rem; color: var(--text-muted); font-size: 1.08rem; }
+    /* Párrafo “lead”: primera frase de una sección, más grande y con color para anclar la atención */
+    .lead {
+      font-size: 1.18rem;
+      line-height: 1.75;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    .lead strong { color: var(--cyan); }
     section ul, section ol { margin: 0.85rem 0 0.85rem 1.25rem; color: var(--text-muted); font-size: 1.08rem; }
     section li { margin-bottom: 0.4rem; }
 
     .card {
-      background: var(--surface);
+      background: var(--surface-tint);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--magenta);
+      border-left: 4px solid var(--magenta);
       border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      margin: 0.6rem 0;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      padding: 1.15rem 1.35rem;
+      margin: 0.65rem 0;
+      box-shadow: var(--shadow-card), var(--shadow-lift);
       opacity: 0;
       transform: translateX(-12px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, border-color 0.2s;
       cursor: pointer;
     }
-    .card:hover { background: #fafbfc; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .card:hover { box-shadow: var(--shadow-hover), var(--shadow-lift); border-left-color: var(--cyan); transform: translateX(0) translateY(-4px); }
     section.visible .card { opacity: 1; transform: translateX(0); }
+    section.visible .card:hover { transform: translateX(0) translateY(-4px); }
     section.visible #principios .card:nth-child(2) { transition-delay: 0.05s; }
     section.visible #principios .card:nth-child(3) { transition-delay: 0.12s; }
     section.visible #principios .card:nth-child(4) { transition-delay: 0.19s; }
@@ -287,26 +353,27 @@
       display: flex;
       align-items: flex-start;
       gap: 0.75rem;
-      margin-bottom: 0.6rem;
-      padding: 0.75rem 1rem;
-      background: var(--surface);
+      margin-bottom: 0.65rem;
+      padding: 0.9rem 1.15rem;
+      background: var(--surface-tint);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--cyan);
+      border-left: 4px solid var(--cyan);
       border-radius: var(--radius);
-      font-size: 1.05rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      font-size: 1.06rem;
+      box-shadow: var(--shadow-card), var(--shadow-lift);
       opacity: 0;
       transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease, border-left-color 0.2s;
       cursor: pointer;
     }
-    .goals-list li:hover { border-left-color: var(--magenta); background: rgba(255, 255, 255, 0.95); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .goals-list li:hover { border-left-color: var(--magenta); box-shadow: var(--shadow-hover), var(--shadow-lift); transform: translateY(-4px); }
     section.visible .goals-list li { opacity: 1; transform: translateY(0); }
     section.visible .goals-list li:nth-child(1) { transition-delay: 0.05s; }
     section.visible .goals-list li:nth-child(2) { transition-delay: 0.12s; }
     section.visible .goals-list li:nth-child(3) { transition-delay: 0.19s; }
     section.visible .goals-list li:nth-child(4) { transition-delay: 0.26s; }
     section.visible .goals-list li:nth-child(5) { transition-delay: 0.33s; }
+    section.visible .goals-list li:hover { transform: translateY(-4px); }
     .goals-list .num {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 600;
@@ -327,22 +394,26 @@
       position: relative;
       padding-bottom: 1rem;
       cursor: pointer;
-      padding: 0.5rem 0.75rem 1rem;
-      margin: 0 -0.75rem 0;
+      padding: 0.65rem 1rem 1rem;
+      margin: 0 -0.5rem 0;
       border-radius: var(--radius);
-      transition: background 0.2s;
+      background: var(--surface-tint);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card), var(--shadow-lift);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
-    .timeline-item:hover { background: var(--surface); }
+    .timeline-item:hover { box-shadow: var(--shadow-hover), var(--shadow-lift); transform: translateY(-3px); }
     .timeline-item::before {
       content: '';
       position: absolute;
       left: -1.5rem;
-      top: 0.35rem;
-      width: 10px;
-      height: 10px;
-      background: var(--magenta);
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, var(--magenta), var(--cyan));
       border-radius: 50%;
-      transform: translateX(-5px);
+      transform: translateX(-6px);
+      box-shadow: 0 0 0 3px var(--surface);
     }
     .timeline-item h4 { font-size: 1.1rem; color: var(--text); margin-bottom: 0.25rem; }
     .timeline-item p { margin: 0; font-size: 1.05rem; color: var(--text-muted); }
@@ -359,29 +430,40 @@
     @media (max-width: 600px) {
       .workstreams { grid-template-columns: 1fr; }
     }
-    .ws { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--green); border-radius: var(--radius); padding: 0.9rem 1rem; cursor: pointer; transition: box-shadow 0.2s, background 0.2s; }
-    .ws:hover { background: #fafbfc; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .ws {
+      background: var(--surface-tint);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: var(--radius);
+      padding: 1rem 1.15rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-card), var(--shadow-lift);
+      transition: box-shadow 0.3s ease, transform 0.3s ease, border-left-color 0.2s;
+    }
+    .ws:hover { box-shadow: var(--shadow-hover), var(--shadow-lift); border-left-color: var(--cyan); transform: translateY(-4px); }
     .ws .ws-id { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--cyan); margin-bottom: 0.3rem; }
     .ws h4 { font-size: 1.1rem; color: var(--text); margin-bottom: 0.4rem; }
     .ws p { margin: 0; font-size: 1rem; color: var(--text-muted); line-height: 1.55; }
 
     .gates { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin-top: 1rem; }
     .gate {
-      background: var(--surface);
+      background: var(--surface-tint);
       border: 1px solid var(--border);
-      border-top: 3px solid var(--magenta);
+      border-top: 4px solid var(--magenta);
       border-radius: var(--radius);
-      padding: 1rem;
+      padding: 1.1rem;
+      box-shadow: var(--shadow-card), var(--shadow-lift);
       opacity: 0;
       transform: translateY(16px);
-      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.2s, background 0.2s;
+      transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, border-top-color 0.2s;
       cursor: pointer;
     }
-    .gate:hover { background: #fafbfc; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .gate:hover { box-shadow: var(--shadow-hover), var(--shadow-lift); border-top-color: var(--cyan); transform: translateY(-6px); }
     section.visible .gate { opacity: 1; transform: translateY(0); }
     section.visible .gates .gate:nth-child(1) { transition-delay: 0.08s; }
     section.visible .gates .gate:nth-child(2) { transition-delay: 0.18s; }
     section.visible .gates .gate:nth-child(3) { transition-delay: 0.28s; }
+    section.visible .gate:hover { transform: translateY(-6px); }
     .gate .gate-id { font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: var(--magenta); margin-bottom: 0.5rem; }
     .gate p { margin: 0; font-size: 1.05rem; color: var(--text-muted); }
 
@@ -392,8 +474,16 @@
     .section-icon { font-size: 1.35em; margin-right: 0.4rem; vertical-align: -0.12em; }
     .goal-emoji { font-size: 1.2em; margin-right: 0.3rem; }
     .entregables-list { list-style: none; margin-left: 0; padding-left: 0; }
-    .entregables-list li { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.55rem; font-size: 1.06rem; cursor: pointer; padding: 0.5rem 0.75rem; border-radius: var(--radius); transition: background 0.2s; }
-    .entregables-list li:hover { background: rgba(255,255,255,0.8); }
+    .entregables-list li {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      margin-bottom: 0.6rem; font-size: 1.06rem; cursor: pointer;
+      padding: 0.65rem 1rem; border-radius: var(--radius);
+      background: var(--surface-tint);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card), var(--shadow-lift);
+      transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.2s;
+    }
+    .entregables-list li:hover { box-shadow: var(--shadow-hover), var(--shadow-lift); transform: translateY(-3px); }
     .entregables-list li::before { content: ''; flex-shrink: 0; }
     .hero-deco {
       display: flex;
@@ -404,30 +494,36 @@
       font-size: 1.75rem;
       opacity: 0.9;
     }
-    .hero .scroll-hint .emoji-ani { display: inline-block; animation: emoji-bounce 1.8s ease-in-out infinite; margin-right: 0.25rem; }
+    .hero .scroll-hint .emoji-ani { display: inline-block; animation: emoji-bounce 3.5s ease-in-out infinite; margin-right: 0.25rem; }
     .hero-mision-vision {
       max-width: 700px;
       margin: 1.5rem auto 0;
       text-align: left;
     }
     .hero-mv-block {
-      background: var(--surface);
+      background: var(--surface-tint);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--magenta);
+      border-left: 4px solid var(--magenta);
       border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      margin-bottom: 0.75rem;
+      padding: 1.15rem 1.35rem;
+      margin-bottom: 0.85rem;
+      box-shadow: var(--shadow-card), var(--shadow-lift);
+      transition: box-shadow 0.3s ease, transform 0.3s ease, border-left-color 0.2s;
+      cursor: pointer;
+      overflow: hidden;
     }
+    .hero-mv-block:hover { box-shadow: var(--shadow-hover), var(--shadow-lift); border-left-color: var(--cyan); transform: translateY(-1px); }
     .hero-mv-title {
-      font-size: 1.15rem;
-      font-weight: 600;
+      font-size: 1.2rem;
+      font-weight: 700;
       color: var(--cyan);
-      margin: 0 0 0.4rem 0;
+      margin: 0 0 0.45rem 0;
+      letter-spacing: -0.01em;
     }
     .hero-mv-text {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
-      line-height: 1.6;
+      line-height: 1.65;
       margin: 0;
     }
     .cta p { font-size: 1.15rem; }
@@ -525,6 +621,7 @@
     <span class="nav__logo">Sistema de Innovación — Lizarte</span>
     <ul class="nav__links">
       <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#innovacion-mision-vision">Innovación, Misión y Visión</a></li>
       <li><a href="#objetivo-90">Objetivo 90 días</a></li>
       <li><a href="#principios">Principios</a></li>
       <li><a href="#workstreams">Workstreams</a></li>
@@ -545,14 +642,19 @@
 
   <section id="inicio" class="hero">
     <span class="tag">📋 Plan de arranque</span>
-    <h1>💡 Sistema Industrial de Innovación Lizarte</h1>
+    <h1>💡 <span class="hero-title-text">Sistema Industrial de Innovación Lizarte</span></h1>
     <p class="sub">One-page plan 90 días (versión Dirección)</p>
     <p class="sub">Arranque Sistema Industrial de Innovación Lizarte</p>
     <div class="hero-deco" aria-hidden="true"><span class="emoji-ani">✨</span><span class="emoji-ani">🚀</span><span class="emoji-ani">📈</span><span class="emoji-ani">🔬</span></div>
+    <p class="scroll-hint"><span class="emoji-ani">👇</span> Desliza para explorar</p>
+  </section>
+
+  <section id="innovacion-mision-vision">
+    <h2><span class="section-icon">💡</span> Innovación, Misión y Visión</h2>
     <div class="hero-mision-vision">
       <div class="hero-mv-block">
         <h3 class="hero-mv-title">💡 Innovación</h3>
-        <p class="hero-mv-text">Innovación es el proceso de transformar una hipótesis incierta en una solución implantada (producto, proceso o servicio) que crea valor nuevo y medible para la empresa, sus clientes y la sociedad.</p>
+        <p class="hero-mv-text">Innovación es el proceso de transformar una hipótesis incierta en una solución implantada (producto, proceso o servicio) que crea valor nuevo y medible para Lizarte, sus clientes y la sociedad.</p>
       </div>
       <div class="hero-mv-block">
         <h3 class="hero-mv-title">🎯 Misión</h3>
@@ -563,12 +665,11 @@
         <p class="hero-mv-text">En 2027, Lizarte será reconocida por contar con un sistema de innovación industrial integrado y gobernable, capaz de convertir retos reales en soluciones implantadas y escalables, elevando de forma sostenida el servicio, la calidad y el valor al cliente.</p>
       </div>
     </div>
-    <p class="scroll-hint"><span class="emoji-ani">👇</span> Desliza para explorar</p>
   </section>
 
   <section id="objetivo-90">
     <h2><span class="section-icon">🎯</span> 1. Objetivo de los 90 días</h2>
-    <p>
+    <p class="lead">
       🎯 Dejar diseñado y operativo el sistema para que Lizarte pueda <strong>captar → priorizar → validar → decidir (GO / No-Go / Transferir)</strong> con rigor, y salir del día 90 con:
     </p>
     <ul class="goals-list">
@@ -588,7 +689,7 @@
     </div>
     <div class="card">
       <h3><span class="emoji-ani">🧭</span> Territorios = hipótesis</h3>
-      <p>🔬 Se descubren/validan con trabajo guiado con Dirección (no se "imponen").</p>
+      <p>🔬 Se descubren/validan con trabajo guiado con la Dirección de Lizarte (no se "imponen").</p>
     </div>
     <div class="card">
       <h3><span class="emoji-ani">👥</span> Beesy: rol metodológico</h3>
@@ -603,17 +704,17 @@
 
   <section id="workstreams">
     <h2><span class="section-icon">🔀</span> 3. Workstreams</h2>
-    <p>📌 Seis líneas de trabajo para activar el sistema en 90 días:</p>
+    <p class="lead">📌 Seis líneas de trabajo para activar el sistema de innovación de Lizarte en 90 días:</p>
     <div class="workstreams">
       <div class="ws">
         <div class="ws-id">🔄 01</div>
         <h4>WS1 — Activación de gobernanza y operación del sistema</h4>
-        <p>👔 Comité de Innovación + Equipo Gestor: responsabilidades, cadencias y "packs" de decisión.</p>
+        <p>👔 Comité de Innovación de Lizarte + Equipo Gestor: responsabilidades, cadencias y "packs" de decisión.</p>
       </div>
       <div class="ws">
         <div class="ws-id">🗺️ 02</div>
-        <h4>WS2 — Territorios de Exploración reales (validación con Dirección)</h4>
-        <p>🗺️ Validar/ajustar/redefinir y priorizar territorios como marco para la exploración.</p>
+        <h4>WS2 — Territorios de Exploración reales (validación con Dirección de Lizarte)</h4>
+        <p>🗺️ Validar/ajustar/redefinir y priorizar territorios como marco para la exploración de Lizarte.</p>
       </div>
       <div class="ws">
         <div class="ws-id">🔍 03</div>
@@ -628,19 +729,19 @@
       <div class="ws">
         <div class="ws-id">🎯 05</div>
         <h4>WS4 — Definición y priorización de retos + selección pilotos</h4>
-        <p>📊 El Equipo Gestor depura y propone; el Comité decide qué retos entran (criterios: alineación a territorios, impacto, viabilidad preliminar, urgencia, incertidumbre/esfuerzo). Clasificación adicional para ordenar cartera: dimensiones (producto/proceso/servicio/modelo) y horizontes H1/H2/H3.</p>
+        <p>📊 El Equipo Gestor de Lizarte depura y propone; el Comité decide qué retos entran (criterios: alineación a territorios, impacto, viabilidad preliminar, urgencia, incertidumbre/esfuerzo). Clasificación adicional para ordenar la cartera de Lizarte: dimensiones (producto/proceso/servicio/modelo) y horizontes H1/H2/H3.</p>
       </div>
       <div class="ws">
         <div class="ws-id">🛠️ 06</div>
         <h4>WS5 — Herramientas y disciplina operativa</h4>
-        <p>🛠️ Plantillas, tableros y trazabilidad para que el sistema sea repetible y gobernable.</p>
+        <p>🛠️ Plantillas, tableros y trazabilidad para que el sistema de Lizarte sea repetible y gobernable.</p>
       </div>
     </div>
   </section>
 
   <section id="calendario">
     <h2><span class="section-icon">📅</span> 4. Calendario por tramos (sin ir "a la carrera")</h2>
-    <p>⏱️ Tres tramos de 30 días para un arranque ordenado:</p>
+    <p>⏱️ Tres tramos de 30 días para un arranque ordenado del sistema Lizarte:</p>
     <div class="timeline">
       <div class="timeline-item">
         <h4><span class="emoji-ani">🚀</span> D1–D30 | Arranque <span class="timeline-dates">(17 Febrero – 17 Marzo)</span></h4>
@@ -648,18 +749,18 @@
       </div>
       <div class="timeline-item">
         <h4><span class="emoji-ani">⚡</span> D31–D60 | Captación estructurada + conversión a retos <span class="timeline-dates">(17 Marzo – 19 Mayo)</span></h4>
-        <p>📋 Ejecutar captación (fuentes internas/externas) y construir backlog con evidencia mínima. Equipo Gestor: depuración + propuesta de retos; clasificación por dimensión e H1/H2/H3. Comité: primer "corte" para evitar saturación y asegurar foco.</p>
+        <p>📋 Ejecutar captación en Lizarte (fuentes internas/externas) y construir backlog con evidencia mínima. Equipo Gestor: depuración + propuesta de retos; clasificación por dimensión e H1/H2/H3. Comité: primer "corte" para evitar saturación y asegurar foco.</p>
       </div>
       <div class="timeline-item">
         <h4><span class="emoji-ani">✅</span> D61–D90 | Cartera priorizada + pilotos listos <span class="timeline-dates">(19 Mayo – 19 Junio)</span></h4>
-        <p>🎯 Priorización final y cierre de cartera inicial de retos. Selección 1–2 retos piloto y "packs" de decisión para activar Fase 2. Cierre de Manual/Procedimientos/Tableros (sistema operativo y documentado).</p>
+        <p>🎯 Priorización final y cierre de la cartera inicial de retos de Lizarte. Selección 1–2 retos piloto y "packs" de decisión para activar Fase 2. Cierre de Manual/Procedimientos/Tableros (sistema operativo y documentado).</p>
       </div>
     </div>
   </section>
 
   <section id="entregables">
-    <h2><span class="section-icon">📦</span> 5. Entregables (para Dirección)</h2>
-    <p>📋 Lo que Dirección recibirá al cierre de los 90 días:</p>
+    <h2><span class="section-icon">📦</span> 5. Entregables (para la Dirección de Lizarte)</h2>
+    <p>📋 Lo que la Dirección de Lizarte recibirá al cierre de los 90 días:</p>
     <ul class="entregables-list">
       <li><span class="emoji-ani">🗺️</span> <strong>Territorios de Exploración priorizados (v1 real)</strong> + criterios de seguimiento/control.</li>
       <li><span class="emoji-ani">📘</span> <strong>Manual de Gobernanza</strong> (roles, cadencias, reglas de decisión, "packs").</li>
@@ -671,127 +772,6 @@
   </section>
 
   <section id="gates" class="center-content">
-    <h2><span class="section-icon">🚦</span> 6. Decisiones / gates (lo que Dirección debe aprobar)</h2>
+    <h2><span class="section-icon">🚦</span> 6. Decisiones / gates (lo que la Dirección de Lizarte debe aprobar)</h2>
     <div class="gates">
-      <div class="gate">
-        <div class="gate-id">🟢 Gate 1 (≈D20–D30)</div>
-        <p>Territorios v1 (suficiente para empezar captación).</p>
-      </div>
-      <div class="gate">
-        <div class="gate-id">🟡 Gate 2 (≈D45–D60)</div>
-        <p>Primer shortlist de retos que entran en cartera (evitar saturación).</p>
-      </div>
-      <div class="gate">
-        <div class="gate-id">🔴 Gate 3 (≈D80–D90)</div>
-        <p>Aprobación de 1–2 retos piloto + recursos mínimos y go/no-go a Fase 2.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="siguientes-pasos" class="cta center-content">
-    <h2><span class="section-icon">🙏</span> Siguientes pasos</h2>
-    <p>
-      🚀 Con la aprobación del plan, los siguientes pasos serían la validación del modelo con dirección, la definición detallada de la Fase 1 y el arranque del proyecto en la fecha acordada.
-    </p>
-    <p class="highlight">🤝 Gracias por tu tiempo. Quedamos a disposición para profundizar en cualquier apartado.</p>
-  </section>
-
-  <script>
-    (function () {
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav__links a');
-      const nav = document.getElementById('nav');
-      let lastScroll = 0;
-
-      function updateActive() {
-        const scrollY = window.scrollY;
-        const vh = window.innerHeight * 0.35;
-        sections.forEach(function (section) {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-          if (scrollY >= top - vh && scrollY < top + height - vh) {
-            section.classList.add('visible');
-            const id = section.getAttribute('id');
-            navLinks.forEach(function (link) {
-              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-            });
-          }
-        });
-      }
-
-      function onScroll() {
-        const current = window.scrollY;
-        if (current > lastScroll && current > 120) nav.classList.add('hidden');
-        else nav.classList.remove('hidden');
-        lastScroll = current;
-        updateActive();
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('load', updateActive);
-
-      navLinks.forEach(function (link) {
-        link.addEventListener('click', function (e) {
-          const href = this.getAttribute('href');
-          if (href && href.startsWith('#')) {
-            e.preventDefault();
-            const target = document.querySelector(href);
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-
-      // Zoom al hacer clic en cuadrados/bloques (solo elementos de las secciones, no del modal)
-      const overlay = document.getElementById('zoomOverlay');
-      const zoomContent = document.getElementById('zoomContent');
-      const zoomBox = document.getElementById('zoomBox');
-      const zoomClose = document.getElementById('zoomClose');
-
-      function openZoom(el) {
-        if (!overlay || !zoomContent || !el) return;
-        if (overlay.contains(el)) return; // no abrir si el clic fue dentro del propio modal
-        var clone = el.cloneNode(true);
-        clone.removeAttribute('id');
-        var kids = clone.querySelectorAll('[id]');
-        for (var i = 0; i < kids.length; i++) kids[i].removeAttribute('id');
-        zoomContent.innerHTML = '';
-        zoomContent.appendChild(clone);
-        overlay.classList.add('is-open');
-        overlay.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        if (zoomClose) zoomClose.focus();
-      }
-
-      function closeZoom() {
-        if (!overlay) return;
-        overlay.classList.remove('is-open');
-        overlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-      }
-
-      function onOverlayClick(e) {
-        if (e.target === overlay) closeZoom();
-      }
-
-      if (overlay) overlay.addEventListener('click', onOverlayClick);
-      if (zoomClose) zoomClose.addEventListener('click', closeZoom);
-      if (zoomBox) zoomBox.addEventListener('click', function (e) { e.stopPropagation(); });
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) closeZoom();
-      });
-
-      // Solo elementos dentro de cada sección, nunca los que estén dentro del overlay
-      var sel = '#objetivo-90 .goals-list li, #principios .card, #workstreams .ws, #calendario .timeline-item, #gates .gate, #entregables .entregables-list li';
-      var zoomables = document.querySelectorAll(sel);
-      zoomables.forEach(function (el) {
-        el.addEventListener('click', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          openZoom(el);
-        });
-      });
-    })();
-  </script>
-</body>
-</html>
+ 
